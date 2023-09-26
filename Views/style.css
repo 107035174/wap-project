@@ -1,0 +1,65 @@
+html {
+    font-family: sans-serif;
+    background-color: #DDD0C8;
+}
+
+.top {
+    display: flex;
+    margin: -0.5%;
+    padding-right: 30px;
+    width: auto;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    box-shadow: 0 0 4px darkslategray;
+}
+
+table {
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+}
+
+
+.login {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 10px;
+    column-gap: 10px;
+    align-items: center;
+}
+
+#loginButton {
+    grid-row: 1/3;
+    grid-column-start: 3;
+    height: 30px;
+    width: 100px;
+    background-color: #1e8449;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px darkslategray;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+#logoutButton {
+    height: 30px;
+    width: 100px;
+    background-color: #1e8449;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px darkslategray;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #79b176;
+}
+
+.body {
+    margin: 10px;
+}
