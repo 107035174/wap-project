@@ -16,7 +16,7 @@ async function getProducts() {
 
 async function placeOrder() {
     const token = localStorage.getItem("data")
-    await fetch('http://localhost:3000/cart/order/', {
+    await fetch('http://localhost:3000/shoppingCart/order/', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -43,6 +43,7 @@ async function getUserCart() {
     }).then(res => {
         return res.json();
     })
+
     if (result.length > 0) {
         renderCart(result)
     } else {
@@ -58,30 +59,31 @@ async function getUserCart() {
 
 async function addToCart(id) {
     const token = localStorage.getItem("data")
-    let result = await fetch('http://localhost:3000/cart/', {
+    let result = await fetch('http://localhost:3000/shoppingCart/', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
             'Authorization': `${token}`
         },
         body: JSON.stringify({
-            productId: id
+            productid: id
         })
     }).then(res => {
         return res.json();
     })
     renderCart(result)
 }
+
 async function removeProduct(id) {
     const token = localStorage.getItem("data")
-    let result = await fetch('http://localhost:3000/cart/', {
+    let result = await fetch('http://localhost:3000/shoppingCart/', {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json',
             'Authorization': `${token}`
         },
         body: JSON.stringify({
-            productId: id
+            productid: id
         })
     }).then(res => {
         return res.json();
@@ -137,18 +139,18 @@ function renderCart(products) {
         quantity.classList.add("column");
 
         let quantityContainer = document.createElement('div');
-        quantityContainer.classList.add('d-flex', 'justify-content-center', 'align-items-center', 'gap-2');
+        quantityContainer.classList.add('d-flex');
 
         let minus = document.createElement('button');
         minus.textContent = '-';
-        minus.classList.add('btn', 'fw-bold', 'text-uppercase', 'p-0', 'btn-light');
+        minus.classList.add('p-0');
         minus.onclick = () => { removeProduct(product.id) };
         let count = document.createElement('p');
         count.textContent = product.quantity;
-        count.classList.add('m-0');
+        count.classList.add('head');
         let plus = document.createElement('button');
         plus.textContent = '+';
-        plus.classList.add('btn', 'fw-bold', 'text-uppercase', 'p-0', 'btn-light');
+        plus.classList.add('p-0');
         plus.onclick = () => { addToCart(product.id) };
 
         quantityContainer.appendChild(minus);
@@ -175,9 +177,8 @@ function renderCart(products) {
     container.appendChild(table);
     let submit_btn = document.createElement('button');
     let submit_div = document.createElement('div');
-    submit_div.classList.add('d-grid', 'gap-2', 'd-md-flex', 'justify-content-md-end')
     submit_btn.textContent = "Place order"
-    submit_btn.classList.add('btn', 'btn-outline-success', 'fw-bold', 'd-inline', 'ms-auto')
+    submit_btn.classList.add('ms-auto')
     submit_btn.onclick = () => { placeOrder() };
     submit_div.appendChild(submit_btn)
     container.appendChild(submit_div)
@@ -228,7 +229,12 @@ function renderProduct(prod) {
 
         let actionsTd = document.createElement('td');
         let button = document.createElement('button');
-        button.classList.add('btn', 'btn-outline-success', 'fw-bold', 'd-inline', 'order');
+
+        let logo = document.createElement('img');
+        logo.src = `./logos/shoppingcart_logo.jpg`
+        logo.alt = 'Add to Cart';
+        logo.width = 30;
+        button.appendChild(logo);
         button.onclick = () => {
             addToCart(product.id);
         };
